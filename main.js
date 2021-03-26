@@ -69,6 +69,5 @@ function zjistiVyhru () {
 		hudba.pause();
 		document.querySelector("#zvukfanfara").play();
 		alert("Gratuluji! Vyhrál jsi!");
-		document.querySelector("body").removeAttribute("onkeyup");
 	} else {}
 }
