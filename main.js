@@ -17,32 +17,34 @@ let windowHeight = window.innerHeight ;
 mince = document.querySelector("#mince");
 let minceSirka = 36;
 let minceVyska = 36;
-mince.style.top = (Math.floor(Math.random() * (windowHeight - 36))) + "px";
-mince.style.left = (Math.floor(Math.random() * (windowWidth - 36))) + "px";
+mince.style.top = (Math.floor(Math.random() * (windowHeight - minceVyska))) + "px";
+mince.style.left = (Math.floor(Math.random() * (windowWidth - minceSirka))) + "px";
 
 function play (event) {
 	if (event.key == "ArrowDown" || event.key == "ArrowUp" || event.key == "ArrowLeft" || event.key == "ArrowRight" ) {
-		hudba.play(); 
-	} else {} 
+		if (parseInt(document.querySelector("#score").innerHTML ) < 5) {
+			hudba.play(); 
+		}
+	} else { hudba.pause();} 
 }
 
 function go (event, step) {   
 	if (event.key == "ArrowDown" && ((parseInt(panacek.style.top) + panacekVyska) < (windowHeight - step))) {
 		panacek.style.top = parseInt(panacek.style.top) + step + "px" ;
 		panacek.src = "obrazky/panacek.png";
-		zjistiStav()
+		zjistiStav();
 	} else if (event.key == "ArrowUp" && (parseInt(panacek.style.top) > step)) {
 		panacek.style.top = parseInt(panacek.style.top) - step + "px" ;
 		panacek.src = "obrazky/panacek-nahoru.png";
-		zjistiStav()
+		zjistiStav();
 	} else if (event.key == "ArrowLeft" && (parseInt(panacek.style.left) > step)) {
 		panacek.style.left = parseInt(panacek.style.left) - step + "px" ;
 		panacek.src = "obrazky/panacek-vlevo.png";	
-		zjistiStav()
+		zjistiStav();
 	} else if (event.key == "ArrowRight" && ((parseInt(panacek.style.left) + panacekSirka) < (windowWidth - step))) {
 		panacek.style.left = parseInt(panacek.style.left) + step + "px" ;
 		panacek.src = "obrazky/panacek-vpravo.png";
-		zjistiStav()
+		zjistiStav();
 	} else {}
 }
 
@@ -55,8 +57,8 @@ function zjistiStav () {
 	let score = document.querySelector("#score");
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
 		document.querySelector("#zvukmince").play();
-		mince.style.top = (Math.floor(Math.random() * (windowHeight - 36))) + "px";
-		mince.style.left = (Math.floor(Math.random() * (windowWidth - 36))) + "px";
+		mince.style.top = (Math.floor(Math.random() * (windowHeight - minceVyska))) + "px";
+		mince.style.left = (Math.floor(Math.random() * (windowWidth - minceSirka))) + "px";
 		score.innerHTML = parseInt(score.innerHTML) + 1;
 		zjistiVyhru()
 	} else {};
@@ -64,9 +66,9 @@ function zjistiStav () {
 
 function zjistiVyhru () {
 	if (score.innerHTML === "5" ) {
-		hudba.pause()
+		hudba.pause();
 		document.querySelector("#zvukfanfara").play();
-		alert("Gratuluji! Vyhrál jsi!")
-		document.querySelector("body").removeAttribute("onkeyup")
+		alert("Gratuluji! Vyhrál jsi!");
+		document.querySelector("body").removeAttribute("onkeyup");
 	} else {}
 }
