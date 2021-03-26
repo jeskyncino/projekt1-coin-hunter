@@ -31,7 +31,6 @@ function play (event) {
 function go (event, step) {   
 	if (event.key == "ArrowDown" && ((parseInt(panacek.style.top) + panacekVyska) < (windowHeight - step))) {
 		panacek.style.top = parseInt(window.getComputedStyle(panacek).getPropertyValue('top')) + step + "px" ;
-		console.log;
 		panacek.src = "obrazky/panacek.png";
 		zjistiStav();
 	} else if (event.key == "ArrowUp" && (parseInt(panacek.style.top) > step)) {
