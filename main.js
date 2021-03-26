@@ -4,8 +4,8 @@ let panacek = document.querySelector("#panacek");
 let panacekSirka = 64 ;
 let panacekVyska = 70 ;
 
-let panacekXS = "500px" ;
-let panacekYS = "500px" ;
+let panacekXS = "50%" ;
+let panacekYS = "50%" ;
 panacek.style.left = panacekXS;
 panacek.style.top = panacekYS;
 
@@ -30,22 +30,23 @@ function play (event) {
 
 function go (event, step) {   
 	if (event.key == "ArrowDown" && ((parseInt(panacek.style.top) + panacekVyska) < (windowHeight - step))) {
-		panacek.style.top = parseInt(panacek.style.top) + step + "px" ;
+		panacek.style.top = parseInt(window.getComputedStyle(panacek).getPropertyValue('top')) + step + "px" ;
+		console.log;
 		panacek.src = "obrazky/panacek.png";
 		zjistiStav();
 	} else if (event.key == "ArrowUp" && (parseInt(panacek.style.top) > step)) {
-		panacek.style.top = parseInt(panacek.style.top) - step + "px" ;
+		panacek.style.top = parseInt(window.getComputedStyle(panacek).getPropertyValue('top')) - step + "px" ;
 		panacek.src = "obrazky/panacek-nahoru.png";
 		zjistiStav();
 	} else if (event.key == "ArrowLeft" && (parseInt(panacek.style.left) > step)) {
-		panacek.style.left = parseInt(panacek.style.left) - step + "px" ;
+		panacek.style.left = parseInt(window.getComputedStyle(panacek).getPropertyValue('left')) - step + "px" ;
 		panacek.src = "obrazky/panacek-vlevo.png";	
 		zjistiStav();
 	} else if (event.key == "ArrowRight" && ((parseInt(panacek.style.left) + panacekSirka) < (windowWidth - step))) {
-		panacek.style.left = parseInt(panacek.style.left) + step + "px" ;
+		panacek.style.left = parseInt(window.getComputedStyle(panacek).getPropertyValue('left')) + step + "px" ;
 		panacek.src = "obrazky/panacek-vpravo.png";
 		zjistiStav();
-	} else {}
+	}
 }
 
 
@@ -61,7 +62,7 @@ function zjistiStav () {
 		mince.style.left = (Math.floor(Math.random() * (windowWidth - minceSirka))) + "px";
 		score.innerHTML = parseInt(score.innerHTML) + 1;
 		zjistiVyhru()
-	} else {};
+	}
 }
 
 function zjistiVyhru () {
@@ -69,5 +70,5 @@ function zjistiVyhru () {
 		hudba.pause();
 		document.querySelector("#zvukfanfara").play();
 		alert("Gratuluji! Vyhrál jsi!");
-	} else {}
+	}
 }
